@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Text:</h2>
+    <input type="text" id="inputText">
+    <br><br>
+     <!-- input the text to replace-->
+     <label for="">Text to replace</label>
+     <input type="text" id="textToReplace">
+     <br><br>
+ 
+     <!-- input the replacement text-->
+     <label for="">Replacement Text</label>
+     <input type="text" id="replacementText">
+     <br> <br>
+
+    <button onclick="convertToUppercase()">Uppercase</button>
+    <button onclick="convertToLowercase()">Lowercase</button>
+    <button onclick="reverseText()">Reverse</button>
+    <button onclick="changeLetter()">Change Letter</button>
+    <button onclick="undoChange()">Undo</button>
+    <br> <br>
+    <div id="output"></div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
