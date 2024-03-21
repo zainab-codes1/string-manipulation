@@ -2,10 +2,12 @@ var originalText = "";
 var lastModifiedText = "";
 var textHistory = [];
 
+//update function to store the last change made
 function updateOutput() {
     document.getElementById("output").innerText = lastModifiedText;
 }
 
+//function to trigger uppercase button
 function convertToUppercase() {
     if (lastModifiedText !== "") {
         lastModifiedText = lastModifiedText.toUpperCase();
@@ -17,6 +19,7 @@ function convertToUppercase() {
     updateOutput();
 }
 
+//function to trigger lowercase button
 function convertToLowercase() {
     if (lastModifiedText !== "") {
         lastModifiedText = lastModifiedText.toLowerCase();
@@ -28,6 +31,7 @@ function convertToLowercase() {
     updateOutput();
 }
 
+//function to trigger reverse button
 function reverseText() {
     if (lastModifiedText !== "") {
         lastModifiedText = lastModifiedText.split('').reverse().join('');
@@ -39,14 +43,17 @@ function reverseText() {
     updateOutput();
 }
 
+//function to change letters or words
 function changeLetter() {
     var inputText = document.getElementById("inputText").value;
     var textToReplace = document.getElementById("textToReplace").value;
     var replacementText = document.getElementById("replacementText").value;
-    var regex = new RegExp(textToReplace, 'gi');
+    var pattern = textToReplace.length === 1?
+    textToReplace : "\\b" + textToReplace + "\\b";
+    var regex = new RegExp(pattern, 'gi');
 
     if (lastModifiedText !== "") {
-        lastModifiedText = inputText.replace
+        lastModifiedText = lastModifiedText.replace
     (regex, replacementText);
     } else {
         lastModifiedText = inputText.replace
@@ -57,12 +64,22 @@ function changeLetter() {
 }
 }
 
+//event listener to assign functon to keys
 document.addEventListener("keydown", function(event){
-    if(event.ctrlKey && event.key ==="z"){
+    if(event.key ==="u"){
+        convertToUppercase();
+    }else if(event.ctrlKey && event.key ==="l"){
+        convertToLowercase();
+   }else if(event.key ==="p"){
+        reverseText();
+    }else if(event.ctrlKey && event.key ==="c"){
+        changeLetter();
+    } else if(event.ctrlKey && event.key ==="z"){
         undoChange();
-    }
+    } 
   });
-
+  
+//function to trigger undo button
 function undoChange() {
     if (textHistory.length > 1) {
         textHistory.pop(); // Remove the last change
